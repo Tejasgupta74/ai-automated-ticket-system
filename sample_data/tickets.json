@@ -1,0 +1,196 @@
+{
+  "train_tickets": [
+    {
+      "ticket_id": "TICK-TR-001",
+      "category": "Billing",
+      "priority": "High",
+      "message": "I was double charged on my credit card for the monthly enterprise subscription invoice #99283."
+    },
+    {
+      "ticket_id": "TICK-TR-002",
+      "category": "Billing",
+      "priority": "Medium",
+      "message": "Where can I download the GST tax receipt and PDF VAT invoice for the past quarter?"
+    },
+    {
+      "ticket_id": "TICK-TR-003",
+      "category": "Billing",
+      "priority": "High",
+      "message": "Payment failed via Stripe auto-debit and now our entire team account is suspended."
+    },
+    {
+      "ticket_id": "TICK-TR-004",
+      "category": "Billing",
+      "priority": "Low",
+      "message": "We would like to update our billing contact email address and payment method details."
+    },
+    {
+      "ticket_id": "TICK-TR-005",
+      "category": "Billing",
+      "priority": "Medium",
+      "message": "Requesting a refund for the prorated unused days following our plan downgrade."
+    },
+    {
+      "ticket_id": "TICK-TR-006",
+      "category": "Technical",
+      "priority": "Critical",
+      "message": "Production database connection timeout throwing 500 internal server error for all web clients."
+    },
+    {
+      "ticket_id": "TICK-TR-007",
+      "category": "Technical",
+      "priority": "High",
+      "message": "The webhook sync endpoint is failing with SSL handshake error when receiving payloads."
+    },
+    {
+      "ticket_id": "TICK-TR-008",
+      "category": "Technical",
+      "priority": "Medium",
+      "message": "Export to CSV feature crashes when dataset exceeds 5000 rows in the reports table."
+    },
+    {
+      "ticket_id": "TICK-TR-009",
+      "category": "Technical",
+      "priority": "Low",
+      "message": "Minor CSS glitch: the dark mode toggle overlaps the notification badge on mobile devices."
+    },
+    {
+      "ticket_id": "TICK-TR-010",
+      "category": "Technical",
+      "priority": "Critical",
+      "message": "Core API Gateway is returning 503 Service Unavailable, blocking checkout for all customers."
+    },
+    {
+      "ticket_id": "TICK-TR-011",
+      "category": "Access",
+      "priority": "High",
+      "message": "Our security admin has been locked out after 3 failed MFA attempts and needs urgent reset."
+    },
+    {
+      "ticket_id": "TICK-TR-012",
+      "category": "Access",
+      "priority": "Medium",
+      "message": "Please provision single sign-on (SSO) SAML role permissions for five new engineering hires."
+    },
+    {
+      "ticket_id": "TICK-TR-013",
+      "category": "Access",
+      "priority": "Medium",
+      "message": "I forgot my master password and the password reset link email is not arriving in inbox."
+    },
+    {
+      "ticket_id": "TICK-TR-014",
+      "category": "Access",
+      "priority": "Low",
+      "message": "Need to revoke access credentials and API tokens for a departing contractor immediately."
+    },
+    {
+      "ticket_id": "TICK-TR-015",
+      "category": "Access",
+      "priority": "High",
+      "message": "Permission denied 403 when trying to access the customer analytics dashboard as analyst."
+    },
+    {
+      "ticket_id": "TICK-TR-016",
+      "category": "General",
+      "priority": "Low",
+      "message": "Could you provide information regarding your data retention and GDPR compliance policy?"
+    },
+    {
+      "ticket_id": "TICK-TR-017",
+      "category": "General",
+      "priority": "Low",
+      "message": "Do you offer non-profit or educational discounts for university student societies?"
+    },
+    {
+      "ticket_id": "TICK-TR-018",
+      "category": "General",
+      "priority": "Low",
+      "message": "Where can we schedule a 30-minute product demo walk-through with a sales representative?"
+    },
+    {
+      "ticket_id": "TICK-TR-019",
+      "category": "General",
+      "priority": "Low",
+      "message": "What is the expected release date for the scheduled Q3 public roadmap features?"
+    },
+    {
+      "ticket_id": "TICK-TR-020",
+      "category": "General",
+      "priority": "Low",
+      "message": "We would like to leave feedback regarding the new onboarding user experience guide."
+    }
+  ],
+  "test_tickets": [
+    {
+      "ticket_id": "TICK-TE-021",
+      "expected_category": "Billing",
+      "expected_priority": "High",
+      "message": "My bank statement shows unauthorized duplicate subscription charge of $199 on our card."
+    },
+    {
+      "ticket_id": "TICK-TE-022",
+      "expected_category": "Billing",
+      "expected_priority": "Medium",
+      "message": "Please send us the updated receipt and tax invoice for our finance accounting department."
+    },
+    {
+      "ticket_id": "TICK-TE-023",
+      "expected_category": "Technical",
+      "expected_priority": "Critical",
+      "message": "Production outage: API gateway completely down with recurring 500 error crashing production."
+    },
+    {
+      "ticket_id": "TICK-TE-024",
+      "expected_category": "Technical",
+      "expected_priority": "Medium",
+      "message": "The search filter function does not return any query results when special characters are used."
+    },
+    {
+      "ticket_id": "TICK-TE-025",
+      "expected_category": "Technical",
+      "expected_priority": "Low",
+      "message": "A typo was noticed in the settings dialog tooltip on the profile preferences screen."
+    },
+    {
+      "ticket_id": "TICK-TE-026",
+      "expected_category": "Access",
+      "expected_priority": "High",
+      "message": "Admin account locked out after multiple login attempts, cannot authenticate or get verification code."
+    },
+    {
+      "ticket_id": "TICK-TE-027",
+      "expected_category": "Access",
+      "expected_priority": "Medium",
+      "message": "New team member cannot view team workspace due to insufficient role permissions."
+    },
+    {
+      "ticket_id": "TICK-TE-028",
+      "expected_category": "General",
+      "expected_priority": "Low",
+      "message": "Can someone share details on security certifications including ISO 27001 and SOC 2 compliance?"
+    },
+    {
+      "ticket_id": "TICK-TE-029",
+      "expected_category": "General",
+      "expected_priority": "Low",
+      "message": "Interested in partnering with your platform, who is the right contact person for business development?"
+    },
+    {
+      "ticket_id": "TICK-TE-030",
+      "expected_category": "General",
+      "expected_priority": "Low",
+      "message": "Where can we submit user feature requests and product enhancement suggestions?"
+    }
+  ],
+  "ambiguous_tickets": [
+    {
+      "ticket_id": "TICK-AMB-031",
+      "message": "hello please help me immediately thanks"
+    },
+    {
+      "ticket_id": "TICK-AMB-032",
+      "message": "payment access credentials issue broken system"
+    }
+  ]
+}
