@@ -10,13 +10,15 @@ from typing import Optional, List, Dict, Any
 DB_PATH = os.environ.get("SQLITE_DB_PATH", os.path.join(os.path.dirname(__file__), "..", "tickets.db"))
 
 def get_connection() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=15.0)
     conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys = ON;")
     return conn
 
 def init_db():
     with get_connection() as conn:
         cursor = conn.cursor()
+        cursor.execute("PRAGMA journal_mode = WAL;")
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS tickets (
                 ticket_id TEXT PRIMARY KEY,
@@ -45,9 +47,13 @@ def init_db():
                 performed_by TEXT NOT NULL,
                 notes TEXT,
                 timestamp TEXT NOT NULL,
-                FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)
+                FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id) ON DELETE CASCADE
             );
         """)
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_tickets_category ON tickets(category);")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_tickets_status ON tickets(status);")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_tickets_created_at ON tickets(created_at);")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_ticket_id ON audit_logs(ticket_id);")
         conn.commit()
 
 def get_ticket(ticket_id: str) -> Optional[Dict[str, Any]]:

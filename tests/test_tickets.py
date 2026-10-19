@@ -154,3 +154,49 @@ def test_test_set_accuracy_metric():
     data = res.json()
     assert data["total_test_samples"] == 10
     assert data["accuracy_percentage"] >= 80.0
+
+
+def test_automatic_ticket_id_generation():
+    """Verify that omitting ticket_id automatically generates a formatted TCK-XXXXXXXX ID."""
+    payload = {
+        "message": "Cannot log in using single sign-on SAML authentication."
+    }
+    res = client.post("/tickets", json=payload)
+    assert res.status_code == 201
+    data = res.json()
+    assert "ticket_id" in data
+    assert data["ticket_id"].startswith("TCK-")
+    assert len(data["ticket_id"]) == 12
+    assert data["category"] == "Access"
+
+
+def test_list_tickets_filtering():
+    """Verify category and status filters on /tickets endpoint."""
+    # Create billing ticket
+    client.post("/tickets", json={"ticket_id": "TICK-FILT-1", "message": "Double billed on my Visa card invoice"})
+    # Create technical ticket
+    client.post("/tickets", json={"ticket_id": "TICK-FILT-2", "message": "Database query timeout throwing 500 error"})
+
+    # Filter by category
+    res = client.get("/tickets?category=Billing")
+    assert res.status_code == 200
+    items = res.json()
+    assert all(i["category"] == "Billing" for i in items)
+
+    # Filter with invalid category
+    bad_res = client.get("/tickets?category=NonExistentCategory")
+    assert bad_res.status_code == 400
+
+
+def test_ticket_not_found():
+    """Verify 404 response for non-existent ticket endpoints."""
+    res_get = client.get("/tickets/NON-EXISTENT-ID")
+    assert res_get.status_code == 404
+
+    res_appr = client.post("/tickets/NON-EXISTENT-ID/approve", json={"decision": "approved", "reviewer_name": "Test"})
+    assert res_appr.status_code == 404
+
+    res_audit = client.get("/tickets/NON-EXISTENT-ID/audit")
+    assert res_audit.status_code == 404
+
+

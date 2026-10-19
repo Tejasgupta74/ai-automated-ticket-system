@@ -12,7 +12,7 @@ StatusType = Literal["pending_review", "approved", "rejected"]
 
 
 class TicketCreateRequest(BaseModel):
-    ticket_id: str = Field(..., min_length=3, max_length=64, description="Unique identifier for the ticket")
+    ticket_id: Optional[str] = Field(None, min_length=3, max_length=64, description="Optional ticket ID; if omitted, one will be auto-generated")
     message: str = Field(..., min_length=5, description="Customer issue description / support query")
 
 

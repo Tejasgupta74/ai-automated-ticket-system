@@ -6,7 +6,7 @@ Uses TF-IDF + Logistic Regression trained on sample dataset with uncertainty thr
 import os
 import json
 import re
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, Optional
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
@@ -54,8 +54,15 @@ RESPONSE_TEMPLATES = {
 }
 
 class TicketClassifierEngine:
-    def __init__(self, confidence_threshold: float = 0.45):
-        self.confidence_threshold = confidence_threshold
+    def __init__(self, confidence_threshold: Optional[float] = None, ambiguity_margin: Optional[float] = None):
+        self.confidence_threshold = (
+            confidence_threshold if confidence_threshold is not None
+            else float(os.environ.get("MODEL_CONFIDENCE_THRESHOLD", 0.45))
+        )
+        self.ambiguity_margin = (
+            ambiguity_margin if ambiguity_margin is not None
+            else float(os.environ.get("AMBIGUITY_MARGIN_THRESHOLD", 0.25))
+        )
         self.pipeline: Pipeline = Pipeline([
             ('tfidf', TfidfVectorizer(ngram_range=(1, 2), stop_words='english', min_df=1)),
             ('clf', LogisticRegression(C=5.0, solver='lbfgs', random_state=42))
@@ -116,7 +123,7 @@ class TicketClassifierEngine:
             needs_review = True
             review_reasons.append(f"Model confidence ({top_confidence:.2f}) below threshold ({self.confidence_threshold:.2f})")
         
-        if margin < 0.25:
+        if margin < self.ambiguity_margin:
             needs_review = True
             review_reasons.append(f"Prediction ambiguity detected: margin between top categories is only {margin:.2f}")
 
